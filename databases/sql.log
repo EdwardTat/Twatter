@@ -1,0 +1,127 @@
+timestamp: 2023-05-17T20:25:01.146478
+CREATE TABLE "py4web_session"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rkey" CHAR(512),
+    "rvalue" TEXT,
+    "expiration" INTEGER,
+    "created_on" TIMESTAMP,
+    "expires_on" TIMESTAMP
+);
+success!
+timestamp: 2023-05-17T20:25:01.157478
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "username" CHAR(512) UNIQUE,
+    "email" CHAR(512) UNIQUE,
+    "password" CHAR(512),
+    "first_name" CHAR(512),
+    "last_name" CHAR(512),
+    "sso_id" CHAR(512),
+    "action_token" CHAR(512),
+    "last_password_change" TIMESTAMP,
+    "past_passwords_hash" TEXT
+);
+success!
+timestamp: 2023-05-17T20:25:01.165480
+CREATE TABLE "auth_user_tag_groups"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "tagpath" CHAR(512),
+    "record_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-05-17T22:51:40.712452
+CREATE TABLE "post"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "posts" CHAR(512)
+);
+success!
+timestamp: 2023-05-17T22:57:14.850778
+CREATE TABLE "posts"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "post" CHAR(512)
+);
+success!
+timestamp: 2023-05-17T22:57:14.857774
+CREATE TABLE "meow"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "post" INTEGER REFERENCES "posts" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "rating" CHAR(1),
+    "rater" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2023-05-18T04:52:42.205172
+CREATE TABLE "users"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user" CHAR(512),
+    "following" CHAR(512)
+);
+success!
+timestamp: 2023-05-18T04:56:48.073442
+CREATE TABLE "user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(512),
+    "last_name" CHAR(512),
+    "email" CHAR(512),
+    "username" CHAR(512),
+    "password" CHAR(512)
+);
+success!
+timestamp: 2023-05-18T17:53:12.628485
+CREATE TABLE "fl"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "following" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "status" CHAR(1)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2023-05-18T20:09:09.257346
+CREATE TABLE "FL"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user" CHAR(512),
+    "following" CHAR(512),
+    "status" CHAR(512)
+);
+timestamp: 2023-05-18T20:12:29.383061
+CREATE TABLE "flist"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user" CHAR(512),
+    "following" CHAR(512),
+    "status" CHAR(512)
+);
+success!
+timestamp: 2023-05-25T00:11:40.795546
+ALTER TABLE "meow" ADD "username" CHAR(512);
+timestamp: 2023-05-25T00:11:40.802543
+ALTER TABLE "meow" ADD "replies" INTEGER;
+timestamp: 2023-05-25T00:11:40.808481
+ALTER TABLE "meow" ADD "timestamp" CHAR(512);
+success!
+timestamp: 2023-05-27T14:47:05.539037
+CREATE TABLE "meows"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "post" CHAR(512),
+    "username" CHAR(512),
+    "rn" INTEGER,
+    "timestamp" CHAR(512)
+);
+success!
+timestamp: 2023-05-27T14:47:05.548034
+CREATE TABLE "replies"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "rid" CHAR(512),
+    "post" CHAR(512),
+    "username" CHAR(512),
+    "rn" CHAR(512),
+    "timestamp" CHAR(512),
+    "rtype" CHAR(512)
+);
+success!
+timestamp: 2023-05-29T20:24:13.442174
+ALTER TABLE "meows" ADD "replyid" CHAR(512);
+success!
